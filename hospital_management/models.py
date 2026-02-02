@@ -4,29 +4,28 @@ from datetime import datetime
 # Users ṭable created
 class User(db.Model):
     __tablename__ = 'users'
-    id = db.column(db.Integer,primary_key = True)
+    id = db.Column(db.Integer,primary_key = True)
     # connecting department table to users as user to department has many to one relationship
-    department_id = db.column(db.Integer, db.Foreignkey('department.id'), nullable = True )
+    department_id = db.Column(db.Integer, db.ForeignKey('department.id'), nullable = True )
 
-    username = db.column(db.string(30),unique = True, nullable = False)
-    email = db.column(db.string(100),unique = True ,nullable = False)
-    password = db.column(db.string(50), nullable = False)
-    role = db.column(db.string(20), nullable = False)
-    created_at = db.column(db.DateTime, default = datetime.utcnow)
+    username = db.Column(db.String(30),unique = True, nullable = False)
+    email = db.Column(db.String(100),unique = True ,nullable = False)
+    password = db.Column(db.String(50), nullable = False)
+    role = db.Column(db.String(20), nullable = False)
+    created_at = db.Column(db.DateTime, default = datetime.utcnow)
 
 
-
-class Department(db.module):
+class Department(db.Model):
     __tablename__ = 'department'
-    id = db.column(db.Integer(50), primary_key = True)
-    name = db.column(db.string(50), nullable = False, unique = True)
-    description = db.column(db.text, nullable = False)
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(50), nullable = False, unique = True)
+    description = db.Column(db.Text, nullable = False)
 
 
 
-class Appointment(db.model):
+class Appointment(db.Model):
     __tablename__ = 'appointment'
-    id = db.column(db.integer , primary_key = True)
-    date = db.column(db.string(12))
-    time = db.column(db.string(6))
-    status = db.column(db.string(30), default = 'Booked')
+    id = db.Column(db.Integer , primary_key = True)
+    date = db.Column(db.String(12))
+    time = db.Column(db.String(6))
+    status = db.Column(db.String(30), default = 'Booked')
